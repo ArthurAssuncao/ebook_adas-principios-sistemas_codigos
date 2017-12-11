@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid = "seu-ssid";
-const char* password = "sua-senha";
+const char* ssid = "some-ssid";
+const char* password = "some-password";
 
 // define web server port
 WiFiServer server(80);
@@ -30,7 +30,7 @@ void loop() {
   client.flush();
   // send response to client
   client.print("HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n
-  	\r\n<!DOCTYPE HTML>\r\n<html>\r\nMensagem de resposta</html>\n");
+  	\r\n<!DOCTYPE HTML>\r\n<html>\r\nResponse message</html>\n");
   delay(1);
   // client is disconnect
   // when function ends and client object is destroyd
