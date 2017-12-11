@@ -3,7 +3,7 @@
 const char* ssid = "seu-ssid";
 const char* password = "sua-senha";
 
-// define a porta do servidor web
+// define web service port
 WiFiServer server(80);
 
 void setup() {
@@ -13,30 +13,30 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
   }
-  // Inicia o servidor
+  // start server
   server.begin();
 }
 
 void loop() {
-  // Checa se algum cliente conectou
+  // check if someone client is connect
   WiFiClient client = server.available();
   if (!client) {
     delay(100);
     return;
   }
-  // Le a primeira linha da requisicao
+  // read first line from request
   String req = client.readStringUntil('\r');
   client.flush();
-  // Cria a string de resposta em JSON
+  // create string to response in JSON
   String s = "HTTP/1.1 200 OK\r\n";
   //s += "Access-Control-Allow-Origin: *\r\n";
   s += "Content-Type: application/json;charset=utf-8\r\n\r\n";
   s += "{";
   s += "'webservice': 'ok'";
   s += "}";
-  // Envia uma resposta ao cliente
+  // send response to client
   client.print(s);
   delay(1);
-  // O cliente eh desconectado 
-  // quando a funcao retornar e o objeto 'client' for destruido
+  // client is disconnect
+  // when function ends and client object is destroyd
 }
